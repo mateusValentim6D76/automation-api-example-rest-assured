@@ -20,6 +20,8 @@ public class BDDStyledMethod {
         .when()
                 .get("http://localhost:3000/posts/")
         .then()
-                .body("author", containsInAnyOrder("Mateus Valentim", "Thalia Lima", "Renato Augusto", null));
+                .body("author", containsInAnyOrder("Mateus Valentim", "Thalia Lima", "Renato Augusto", null)).statusCode(200);
     }
+
+
 }
