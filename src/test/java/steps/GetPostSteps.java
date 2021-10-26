@@ -15,7 +15,7 @@ public class GetPostSteps {
 
 	@Given("I perform GET for the post number {string}")
 	public void i_perform_get_for_the_post_number(String postNumber) {
-		BDDStyledMethod.SimpleGETPost(postNumber);
+		BDDStyledMethod.simpleGETPost(postNumber);
 	}
 
 	@Then("I should see the author name {string}")
@@ -24,4 +24,8 @@ public class GetPostSteps {
 		throw new io.cucumber.java.PendingException();
 	}
 
+	@Then("I should see the author names")
+	public void iShouldSeeTheAuthorNames() {
+		BDDStyledMethod.performConstainsCollection();
+	}
 }
