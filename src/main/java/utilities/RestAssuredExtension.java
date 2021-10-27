@@ -1,7 +1,10 @@
 package utilities;
+
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
 
 import java.net.URI;
@@ -12,7 +15,7 @@ public class RestAssuredExtension {
 
     public static RequestSpecification Request;
 
-    public RestAssuredExtension(){
+    public RestAssuredExtension() {
         //Arrange
         RequestSpecBuilder reqBuilder = new RequestSpecBuilder();
         reqBuilder.setBaseUri("http://localhost:3000");
@@ -21,14 +24,34 @@ public class RestAssuredExtension {
         Request = RestAssured.given().spec(requestSpec);
     }
 
-    public static void getOpsWithPathParameter(String url, Map<String, String> pathParams) throws URISyntaxException {
+    //    public static void getOpsWithPathParameter(String url, Map<String, String> pathParams) throws URISyntaxException {
+//        //ACT
+//        Request.pathParams(pathParams);
+//        Request.get(new URI(url));
+//    }
+
+//    public static void getOps(String url) throws URISyntaxException {
+//        //ACT
+//        Request.get(new URI(url));
+//    }
+
+    public static void getOpsWithPathParameter(String url, Map<String, String> pathParams) {
         //ACT
         Request.pathParams(pathParams);
-        Request.get(new URI(url));
+        try {
+            Request.get(new URI(url));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void getOps(String url) throws URISyntaxException {
-        //ACT
-        Request.get(new URI(url));
+    public static ResponseOptions<Response> GetOps(String url) {
+        //Act
+        try {
+            return Request.get(new URI(url));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

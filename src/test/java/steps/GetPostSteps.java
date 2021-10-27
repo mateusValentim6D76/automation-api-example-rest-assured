@@ -3,25 +3,33 @@ package steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import static org.junit.Assert.*;
+
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseOptions;
+import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
+import org.junit.Assert;
+import utilities.RestAssuredExtension;
 
 public class GetPostSteps {
 
+	public static ResponseOptions<Response> response;
+
 	@Given("I perform GET operation for {string}")
-	public void i_perform_get_operation_for(String url) {
-
+	public void i_perform_get_operation_for(String url) throws Throwable{
+		 response = RestAssuredExtension.GetOps(url);
 	}
 
-	@Given("I perform GET for the post number {string}")
-	public void i_perform_get_for_the_post_number(String postNumber) {
-		BDDStyledMethod.simpleGETPost(postNumber);
-	}
+	@Then("I should see the author name as {string}")
+	public void i_should_see_the_author_name(String authorName) {
+		assertThat(response.getBody().jsonPath().get("author"), hasItem("Mateus Valentim"));
 
-	@Then("I should see the author name {string}")
-	public void i_should_see_the_author_name(String string) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
 	}
 
 	@Then("I should see the author names")
