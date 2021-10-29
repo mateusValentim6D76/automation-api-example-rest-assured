@@ -17,3 +17,6 @@ Feature:
   Scenario: Verify Query Parameter of GET
     Given I perform GET operation for "/post"
     Then I should see verify GET query Parameter
+
+  Scenario: Verify POST operation
+    Given I perform POST operation for "/post"

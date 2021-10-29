@@ -45,6 +45,10 @@ public class GetPostSteps {
 	@Then("I should see verify GET query Parameter")
 	public void i_should_see_verify_get_query_parameter() {
 		BDDStyledMethod.performQueryParameter();
+	}
 
+	@Given("I perform POST operation for {string}")
+	public void i_perform_post_operation_for(String string) {
+		BDDStyledMethod.performPOSTWithBodyParameter();
 	}
 }
