@@ -53,5 +53,14 @@ public class RestAssuredExtension {
             e.printStackTrace();
         }
         return null;
+    }public static ResponseOptions<Response> POSTOpsWithBodyAndPathParams(String url, Map<String, String> pathParams, Map<String,String> body) {
+        Request.pathParams(pathParams);
+        Request.body(body);
+        try {
+            return Request.post(new URI(url));
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
